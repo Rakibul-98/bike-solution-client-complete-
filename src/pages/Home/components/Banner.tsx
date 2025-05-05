@@ -59,7 +59,7 @@ export default function Banner() {
   };
 
   return (
-    <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden my-5"
+    <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden"
     onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)} 
     >

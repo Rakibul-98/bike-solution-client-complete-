@@ -12,13 +12,13 @@ const CartIcon = ({ cartItems }: CartItemPropType) => (
       <NavLink
         to="/cart"
         className={({ isActive }) =>
-          isActive ? "text-purple-500 font-semibold" : "hover:text-purple-500"
+          isActive ? "text-secondary font-semibold" : "hover:text-secondary"
         }
       >
-        <TiShoppingCart />
+        <TiShoppingCart className="text-3xl" />
       </NavLink>
       {cartItems.length > 0 && (
-        <span className="absolute h-2 w-2 -right-[5px] -top-[5px] bg-blue-700 rounded-full"></span>
+        <span className="absolute h-3 w-3 -right-[5px] -top-[5px] bg-accent rounded-full"></span>
       )}
     </div>
   );

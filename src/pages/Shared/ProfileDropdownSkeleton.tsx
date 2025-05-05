@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 export function ProfileDropdownSkeleton() {
   return (
     <div className="dropdown dropdown-bottom dropdown-end">
-      <div tabIndex={0} className="hover:text-purple-500">
+      <div tabIndex={0} className="hover:text-secondary">
         <CgProfile />
       </div>
       <ul
@@ -12,7 +12,7 @@ export function ProfileDropdownSkeleton() {
       >
         {/* Skeleton for Avatar */}
         <div className="avatar placeholder my-2 animate-pulse">
-          <div className="ring-primary ring-offset-base-200 w-10 rounded-full ring ring-offset-2 bg-gray-300"></div>
+          <div className="ring-primary ring-offset-base-200 w-10 rounded-full ring ring-offset-2 bg-base-100/75"></div>
         </div>
 
         {/* Skeleton for Name */}

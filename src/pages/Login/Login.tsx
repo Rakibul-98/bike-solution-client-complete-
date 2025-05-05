@@ -40,14 +40,7 @@ export default function Login() {
 
       const dashboardPath = `/${user?.role?.toLowerCase()}Dashboard`;
 
-      // const from = location.state?.from?.pathname;
-      // if (from && from.includes("Dashboard")) {
-      //   navigate(dashboardPath, { replace: true });
-      // } else {
-      //   navigate(from || dashboardPath, { replace: true });
-      // }
-      const from = location.state?.from; // This now comes from the <Link state>
-
+      const from = location.state?.from;
       if (!from || from.includes("Dashboard")) {
         navigate(dashboardPath, { replace: true });
       } else {
