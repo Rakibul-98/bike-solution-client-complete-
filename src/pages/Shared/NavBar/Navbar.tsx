@@ -15,7 +15,6 @@ import { ProfileDropdownSkeleton } from "../ProfileDropdownSkeleton";
 import CartIcon from "./CartIcon";
 import CustomNavLink from "./CustomNavLink";
 import logo from "../../../assets/images/logo (3) (1).png";
-import Searchbar from "./Searchbar";
 import { IoIosArrowDown } from "react-icons/io";
 
 export default function Navbar() {
@@ -55,11 +54,11 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="sticky top-0 z-50 flex justify-between items-center shadow-lg py-3 bg-primary text-base-100 px-5">
+    <div className="sticky top-0 z-50 flex justify-between items-center shadow-lg py-3 bg-primary text-base-100 px-16">
       <NavLink to="/">
         <img className="h-10" src={logo} alt="logo" />
       </NavLink>
-      <Searchbar />
+      {/* <Searchbar /> */}
 
       {/* Mobile Cart Icon and Menu Toggle */}
       <div className="flex items-center gap-3 lg:hidden">

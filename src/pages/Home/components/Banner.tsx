@@ -4,7 +4,6 @@ import bike2 from '../../../assets/images/bike-2.jpg';
 import bike3 from '../../../assets/images/bike-3.jpg';
 import bike4 from '../../../assets/images/bike-4.jpg';
 import bike5 from '../../../assets/images/bike-5.jpg';
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 const images = [
@@ -37,31 +36,25 @@ const images = [
 
 export default function Banner() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  // const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (isPaused) return;
+    // if (isPaused) return;
 
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
     return () => clearInterval(interval);
-  }, [currentIndex, isPaused]);
+  }, [currentIndex]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
   return (
     <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden"
-    onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)} 
+    // onMouseEnter={() => setIsPaused(true)}
+    //   onMouseLeave={() => setIsPaused(false)} 
     >
       <div className="w-full h-full relative">
         {images.map((image, index) => (
@@ -77,7 +70,7 @@ export default function Banner() {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
-              <div className="p-8 md:p-16 text-white max-w-xl mx-10">
+              <div className="p-8 md:p-16 text-white max-w-xl">
                 <h2 className="text-3xl md:text-5xl font-bold relative">
                   <span className="absolute inset-x-0 bottom-0 h-1 bg-yellow-400 transition-all duration-500"></span>
                   {image.title}
@@ -91,19 +84,6 @@ export default function Banner() {
           </div>
         ))}
       </div>
-
-      <button
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full transition-all"
-        onClick={prevSlide}
-      >
-        <IoIosArrowBack />
-      </button>
-      <button
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full transition-all"
-        onClick={nextSlide}
-      >
-        <IoIosArrowForward />
-      </button>
     </div>
   );
 }

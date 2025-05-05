@@ -1,27 +1,43 @@
+
 function Brands() {
   const brandLogos = [
-    { name: "Yamaha", src: "../../../assets/brands/logo- (1).svg" },
-    { name: "Honda", src: "/brands/honda.png" },
-    { name: "Suzuki", src: "/brands/suzuki.png" },
-    { name: "Kawasaki", src: "/brands/kawasaki.png" },
-    { name: "BMW", src: "/brands/bmw.png" },
-    { name: "Ducati", src: "/brands/ducati.png" },
+    { name: "Yamaha", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(1).svg" },
+    { name: "Honda", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(2).svg" },
+    { name: "Suzuki", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(3).svg" },
+    { name: "Kawasaki", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(4).svg" },
+    { name: "BMW", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(5).svg" },
+    { name: "Ducati", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(6).svg" },
+    { name: "Harley", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(7).svg" },
+    { name: "KTM", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(8).svg" },
+    { name: "Triumph", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(9).svg" },
+    { name: "Aprilia", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(10).svg" },
+    { name: "Royal Enfield", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(11).svg" },
+    { name: "MV Agusta", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(12).svg" },
+    { name: "Hero", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(13).svg" },
+    { name: "Bajaj", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(14).svg" },
+    { name: "TVS", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(15).svg" },
+    { name: "Vespa", src: "https://tranquil-raindrop-867750.netlify.app/logo-%20(16).svg" },
   ];
 
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-12 overflow-hidden">
+      <div className=" mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Our Brands</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
-          {brandLogos.map((brand) => (
-            <div key={brand.name} className="flex justify-center items-center">
-              <img
-                src={brand.src}
-                alt={brand.name}
-                className="max-h-20 object-contain grayscale hover:grayscale-0 transition duration-300"
-              />
-            </div>
-          ))}
+
+        <div className="whitespace-nowrap overflow-hidden mb-10">
+          <div className="flex animate-slide-left gap-16">
+            {brandLogos.concat(brandLogos).map((brand, index) => (
+              <img key={`${brand.name}-${index}`} src={brand.src} alt={brand.name} className="h-12 w-auto" />
+            ))}
+          </div>
+        </div>
+
+        <div className="whitespace-nowrap overflow-hidden">
+          <div className="flex animate-slide-right gap-16">
+            {brandLogos.reverse().concat(brandLogos).map((brand, index) => (
+              <img key={`${brand.name}-rev-${index}`} src={brand.src} alt={brand.name} className="h-12 w-auto" />
+            ))}
+          </div>
         </div>
       </div>
     </section>
