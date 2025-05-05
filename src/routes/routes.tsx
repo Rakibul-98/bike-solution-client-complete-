@@ -32,17 +32,48 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      { path: "productDetails/:productId", element: <ProductDetails /> },
 
-
-      { path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
-      { path: "checkout", element: <ProtectedRoute><CheckOut /></ProtectedRoute> },
-      { path: "profile", element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
-      { path: "productDetails/:productId", element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
-      { path: "order-success", element: <ProtectedRoute><OrderSuccess /></ProtectedRoute> },
+      {
+        path: "cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "checkout",
+        element: (
+          <ProtectedRoute>
+            <CheckOut />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <UserProfile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "order-success",
+        element: (
+          <ProtectedRoute>
+            <OrderSuccess />
+          </ProtectedRoute>
+        ),
+      },
 
       {
         path: "adminDashboard",
-        element: <ProtectedRoute><AdminDashboard /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        ),
         children: [
           { index: true, element: <AllProducts /> },
           { path: "allProducts", element: <AllProducts /> },
@@ -54,7 +85,11 @@ const router = createBrowserRouter([
 
       {
         path: "customerDashboard",
-        element: <ProtectedRoute><CustomerDashboard /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <CustomerDashboard />
+          </ProtectedRoute>
+        ),
         children: [
           { index: true, element: <AllOrders /> },
           { path: "allOrders", element: <AllOrders /> },

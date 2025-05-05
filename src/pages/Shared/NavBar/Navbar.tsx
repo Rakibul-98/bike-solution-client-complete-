@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/features/hooks";
 import { logout, selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import toast from "react-hot-toast";
@@ -15,6 +15,7 @@ import CustomNavLink from "./CustomNavLink";
 
 export default function Navbar() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const loggedInUser = useAppSelector(selectCurrentUser);
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
@@ -86,6 +87,7 @@ export default function Navbar() {
         ) : (
           <NavLink
             to="/login"
+            state={{ from: location.pathname }}
             className={({ isActive }) =>
               `px-4 py-1 text-sm uppercase rounded transition duration-300 border bg-gray-200 text-purple-500 font-bold hover:bg-purple-500 hover:text-white ${
                 isActive && "bg-purple-500 text-white"
@@ -97,7 +99,6 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="sm:hidden absolute top-12 left-0 right-0 bg-white shadow-lg z-50 text-end">
           <ul className="flex flex-col p-4">
@@ -120,6 +121,7 @@ export default function Navbar() {
               <li>
                 <NavLink
                   to="/login"
+                  state={{ from: location.pathname }}
                   className={({ isActive }) =>
                     `px-4 py-1 text-sm uppercase rounded transition duration-300 border bg-gray-200 text-purple-500 font-bold hover:bg-purple-500 hover:text-white ${
                       isActive && "bg-purple-500 text-white"

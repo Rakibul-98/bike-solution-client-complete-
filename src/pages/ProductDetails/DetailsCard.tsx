@@ -4,26 +4,32 @@ import { useEffect, useState, useMemo } from "react";
 import { BsCartPlus, BsCheck, BsExclamationTriangle } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { createSelector } from "@reduxjs/toolkit";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useGetUserByEmailQuery } from "../../redux/features/users/usersApi";
 import { RootState } from "../../redux/features/store";
 import { ItemType } from "../../interfaces/interfaces";
+import DetailsSkeleton from './DetailsSkeleton';
 
-const selectCartItems = (state:RootState ) => state.cart.items;
-const memoizedCartItems = createSelector(
-  [selectCartItems],
-  (items) => (Array.isArray(items) ? items : [])
+const selectCartItems = (state: RootState) => state.cart.items;
+const memoizedCartItems = createSelector([selectCartItems], (items) =>
+  Array.isArray(items) ? items : []
 );
 
-export default function DetailsCard({ productData }: { productData: ItemType }) {
+export default function DetailsCard({
+  productData,
+}: {
+  productData: ItemType;
+}) {
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
   const [isLimitExceed, setIsLimitExceed] = useState(false);
-
-  const loggedInUser = useSelector((state:RootState) => state?.auth?.user);
-  const { data: user, error: userError, isLoading: isUserLoading } = useGetUserByEmailQuery(
-    loggedInUser?.user || ""
-  );
+  const location = useLocation();
+  const loggedInUser = useSelector((state: RootState) => state?.auth?.user);
+  const {
+    data: user,
+    // error: userError,
+    isLoading: isUserLoading,
+  } = useGetUserByEmailQuery(loggedInUser?.user || "");
 
   const {
     available_quantity,
@@ -63,68 +69,79 @@ export default function DetailsCard({ productData }: { productData: ItemType }) 
     }
   };
 
-  if (isUserLoading) return <p>loading user</p>;
-  if (userError) return toast.error("Error loading user");
-
   return (
     <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-2 bg-no-repeat bg-cover">
-        <div className="w-[90%] mx-auto md:ms-0">
-          <img className="h-[500px] w-full" src={product_image} alt={name} />
-        </div>
+      {isUserLoading ? (
+        <DetailsSkeleton/>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 bg-no-repeat bg-cover">
+          <div className="w-[90%] mx-auto md:ms-0">
+            <img className="h-[500px] w-full" src={product_image} alt={name} />
+          </div>
 
-        <div className="flex items-center">
-          <div className="w-10/12 mx-auto mt-5 md:mt-0">
-            <h2 className="text-3xl font-semibold font-mono">{name}</h2>
-            <div className="flex gap-5 items-center">
-              <div className="rating rating-sm">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <input key={index} type="radio" name="rating-1" className="mask mask-star" />
-                ))}
+          <div className="flex items-center">
+            <div className="w-10/12 mx-auto mt-5 md:mt-0">
+              <h2 className="text-3xl font-semibold font-mono">{name}</h2>
+              <div className="flex gap-5 items-center">
+                <div className="rating rating-sm">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <input
+                      key={index}
+                      type="radio"
+                      name="rating-1"
+                      className="mask mask-star"
+                    />
+                  ))}
+                </div>
+                <p>(200 Reviews)</p>
               </div>
-              <p>(200 Reviews)</p>
-            </div>
-            <div className="flex gap-5 my-5 items-center">
-              <p className="text-red-500 font-medium text-xl">${price}</p>
-              <p className="line-through">${fakePrice}</p>
-              <p className="bg-red-500 py-1 px-[6px] text-xs text-white">-{discountPercentage}%</p>
-            </div>
+              <div className="flex gap-5 my-5 items-center">
+                <p className="text-red-500 font-medium text-xl">${price}</p>
+                <p className="line-through">${fakePrice}</p>
+                <p className="bg-red-500 py-1 px-[6px] text-xs text-white">
+                  -{discountPercentage}%
+                </p>
+              </div>
 
-            <div className="flex justify-between">
-              <p>
-                <span className="font-semibold font-serif">Brand:</span> {brand}
-              </p>
-              <p>
-                <span className="font-semibold font-serif">Category:</span> {category}
-              </p>
-            </div>
-            <div className="flex justify-between">
-              <p>
-                <span className="font-semibold font-serif">Available Quantity:</span>{" "}
-                {available_quantity}
-              </p>
-              <p>
-                <span className="font-semibold font-serif">In-Stock:</span>{" "}
-                <span className={inStock ? "text-green-500" : "text-red-500"}>
-                  {inStock ? "Available" : "Out of stock"}
-                </span>
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold font-serif mt-3">Description</h3>
-              <p>{description}</p>
-            </div>
-            <ul>
-              <h3 className="font-semibold font-serif mt-3">Features:</h3>
-              {features.map((feature: string, index: number) => (
-                <li className="list-disc list-inside" key={index}>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+              <div className="flex justify-between">
+                <p>
+                  <span className="font-semibold font-serif">Brand:</span>{" "}
+                  {brand}
+                </p>
+                <p>
+                  <span className="font-semibold font-serif">Category:</span>{" "}
+                  {category}
+                </p>
+              </div>
+              <div className="flex justify-between">
+                <p>
+                  <span className="font-semibold font-serif">
+                    Available Quantity:
+                  </span>{" "}
+                  {available_quantity}
+                </p>
+                <p>
+                  <span className="font-semibold font-serif">In-Stock:</span>{" "}
+                  <span className={inStock ? "text-green-500" : "text-red-500"}>
+                    {inStock ? "Available" : "Out of stock"}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold font-serif mt-3">Description</h3>
+                <p>{description}</p>
+              </div>
+              <ul>
+                <h3 className="font-semibold font-serif mt-3">Features:</h3>
+                {features.map((feature: string, index: number) => (
+                  <li className="list-disc list-inside" key={index}>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
-            <div className="flex justify-end mt-5">
-              {loggedInUser?.role === "customer" && !user?.data?.isBlocked ? (
+              <div className="flex justify-end mt-5">
+                {loggedInUser?.role === "customer" && !user?.data?.isBlocked ? (
                 <button
                   onClick={handleAddToCart}
                   disabled={!inStock || isLimitExceed}
@@ -150,18 +167,20 @@ export default function DetailsCard({ productData }: { productData: ItemType }) 
                     </>
                   )}
                 </button>
-              ) : (
+                ) : (
                 <Link
                   to="/login"
+                  state={{ from: location.pathname }}
                   className="flex items-center gap-2 px-5 py-[6px] font-semibold rounded-btn shadow-lg border bg-slate-200 hover:bg-base-100"
                 >
                   {user?.data?.isBlocked ? "User Blocked" : "Login as customer to buy product"}
                 </Link>
               )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

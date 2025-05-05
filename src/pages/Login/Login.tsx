@@ -11,18 +11,22 @@ import { APIErrorType } from "../../interfaces/interfaces";
 type formDataType = {
   email: string;
   password: string;
-}
+};
 
 export default function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const { register, handleSubmit, formState: { errors } } = useForm<formDataType>({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formDataType>({
     defaultValues: {
       email: "user@example.com",
-      password: "12345"
-    }
+      password: "12345",
+    },
   });
   const [login] = useLoginMutation();
 
@@ -31,20 +35,28 @@ export default function Login() {
       const res = await login(data).unwrap();
       const user = verifyToken(res.data.token);
       dispatch(setUser({ user, token: res.data.token }));
-  
+
       toast.success("Login successful!");
-  
+
       const dashboardPath = `/${user?.role?.toLowerCase()}Dashboard`;
-  
-      const from = location.state?.from?.pathname;
-      if (from && from.includes("Dashboard")) {
+
+      // const from = location.state?.from?.pathname;
+      // if (from && from.includes("Dashboard")) {
+      //   navigate(dashboardPath, { replace: true });
+      // } else {
+      //   navigate(from || dashboardPath, { replace: true });
+      // }
+      const from = location.state?.from; // This now comes from the <Link state>
+
+      if (!from || from.includes("Dashboard")) {
         navigate(dashboardPath, { replace: true });
       } else {
-        navigate(from || dashboardPath, { replace: true });
+        navigate(from, { replace: true });
       }
-    }catch (error: unknown) {
-        const errorMessage =
-        (error as APIErrorType)?.data?.message || "Login failed! Invalid credentials!!";
+    } catch (error: unknown) {
+      const errorMessage =
+        (error as APIErrorType)?.data?.message ||
+        "Login failed! Invalid credentials!!";
       toast.error(errorMessage);
     }
   };
@@ -52,7 +64,6 @@ export default function Login() {
   return (
     <div className="my-10 min-h-[80vh] flex items-center justify-center px-4">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row max-w-4xl w-full border">
-        
         <div className="md:w-1/2 hidden md:flex items-center justify-center bg-gray-50 p-8">
           <img src={loginImg} alt="Login" className="w-80" />
         </div>
@@ -64,22 +75,26 @@ export default function Login() {
 
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
-            <label>User email</label>
-            <input
-              {...register("email", { required: "Email is required" })}
-              className={`${errors.email && "border-red-500 focus:outline-red-500"} w-full px-4 py-2 border border-gray-300 rounded-lg`}
-              placeholder="Email"
-            />
+              <label>User email</label>
+              <input
+                {...register("email", { required: "Email is required" })}
+                className={`${
+                  errors.email && "border-red-500 focus:outline-red-500"
+                } w-full px-4 py-2 border border-gray-300 rounded-lg`}
+                placeholder="Email"
+              />
             </div>
 
             <div>
-            <label>Password</label>
-            <input
-              {...register("password", { required: "Password is required" })}
-              type="password"
-              className={`${errors.password && "border-red-500 focus:outline-red-500"} w-full px-4 py-2 border border-gray-300 rounded-lg`}
-              placeholder="Password"
-            />
+              <label>Password</label>
+              <input
+                {...register("password", { required: "Password is required" })}
+                type="password"
+                className={`${
+                  errors.password && "border-red-500 focus:outline-red-500"
+                } w-full px-4 py-2 border border-gray-300 rounded-lg`}
+                placeholder="Password"
+              />
             </div>
 
             <button
