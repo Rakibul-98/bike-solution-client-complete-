@@ -22,6 +22,7 @@ import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 import Overview from "../pages/Dashboard/Admin/components/Overview/Overview";
 import Terms from "../pages/Terms/Terms";
 import Services from "../pages/Services/Services";
+import Gallery from "../pages/Gallery/Gallery";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "terms-of-use", element: <Terms /> },
       { path: "services", element: <Services /> },
+      { path: "gallery", element: <Gallery /> },
       { path: "productDetails/:productId", element: <ProductDetails /> },
 
       {

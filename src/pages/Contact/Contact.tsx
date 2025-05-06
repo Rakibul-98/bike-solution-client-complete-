@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import img from '../../assets/images/contact.svg';
+import img from "../../assets/images/contact.svg";
 import toast from "react-hot-toast";
 
 type FormInputs = {
@@ -24,9 +24,9 @@ export default function Contact() {
   };
 
   return (
-    <div className=" min-h-[calc(100vh-90px)] flex items-center justify-center px-4">
-      <div className="max-w-5xl w-full bg-white shadow-lg rounded-xl flex flex-col md:flex-row border">
-        <div className="md:w-1/2 hidden md:flex items-center justify-center bg-gradient-to-l from-blue-400 rounded-l-xl">
+    <div className="w-[90%] mx-auto">
+      <div className=" flex items-center justify-center px-4">
+        <div className="md:w-1/2 hidden md:flex items-center justify-center">
           <img
             src={img} // Replace with your image
             alt="Contact Us"
@@ -34,9 +34,13 @@ export default function Contact() {
           />
         </div>
 
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-semibold text-gray-900 text-center">Contact Us</h2>
-          <p className="text-gray-600 text-center mt-2">We’d love to hear from you!</p>
+        <div className="w-full md:w-1/2 p-8 shadow-lg rounded-md">
+          <h2 className="text-3xl font-semibold text-gray-900 text-center font-mono border-b-4 border-primary w-fit pb-1">
+            Contact Us
+          </h2>
+          <p className="text-gray-600 mt-2">
+            We’d love to hear from you!
+          </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
             <div>
@@ -45,7 +49,9 @@ export default function Contact() {
                 {...register("name", { required: "Name is required" })}
                 type="text"
                 placeholder="Enter your name"
-                className={`${errors.name && "border-red-500 focus:outline-red-500"} w-full mt-1 px-4 py-2 border rounded-lg`}
+                className={`${
+                  errors.name && "border-red-500 focus:outline-red-500"
+                } w-full mt-1 px-4 py-2 border rounded-lg`}
               />
             </div>
 
@@ -55,11 +61,16 @@ export default function Contact() {
               <input
                 {...register("email", {
                   required: "Email is required",
-                  pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email address" },
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid email address",
+                  },
                 })}
                 type="email"
                 placeholder="Enter your email"
-                className={`${errors.email && "border-red-500 focus:outline-red-500"} w-full mt-1 px-4 py-2 border rounded-lg`}
+                className={`${
+                  errors.email && "border-red-500 focus:outline-red-500"
+                } w-full mt-1 px-4 py-2 border rounded-lg`}
               />
             </div>
 
@@ -67,16 +78,24 @@ export default function Contact() {
             <div>
               <label className="block text-gray-700 font-medium">Message</label>
               <textarea
-                {...register("message", { required: "Message is required", minLength: { value: 10, message: "Message should be at least 10 characters" } })}
+                {...register("message", {
+                  required: "Message is required",
+                  minLength: {
+                    value: 10,
+                    message: "Message should be at least 10 characters",
+                  },
+                })}
                 rows={4}
                 placeholder="Type your message here..."
-                className={`${errors.message && "border-red-500 focus:outline-red-500"} w-full mt-1 px-4 py-2 border rounded-lg`}
+                className={`${
+                  errors.message && "border-red-500 focus:outline-red-500"
+                } w-full mt-1 px-4 py-2 border rounded-lg`}
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition duration-300"
+              className="w-full bg-primary hover:bg-primary-80 text-white font-semibold py-2 rounded-lg transition duration-300"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
@@ -87,4 +106,3 @@ export default function Contact() {
     </div>
   );
 }
-

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { AiFillProduct, AiOutlineMenuUnfold } from "react-icons/ai";
-import { BiPurchaseTag } from "react-icons/bi";
-import { FaChartPie, FaUsers } from "react-icons/fa";
+import { BiPurchaseTag, BiHistory } from "react-icons/bi";
+import { FaChartPie, FaUsers, FaShoppingCart } from "react-icons/fa";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../../redux/features/hooks";
@@ -32,7 +32,7 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
       <div className="flex items-center justify-between py-3 px-4 bg-primary">
         {isOpen && (
           <span className="text-md lg:text-lg font-semibold whitespace-nowrap">
-            {userRole === "admin" ? "Admin Panel" : "Customer Panel"}
+            {userRole === "admin" ? "Admin Panel" : "My Account"}
           </span>
         )}
         <button
@@ -56,7 +56,7 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
         } mt-4`}
       >
         <ul className="space-y-2 pt-1">
-          {userRole === "admin" && (
+          {userRole === "admin" ? (
             <>
               <li>
                 <NavLink
@@ -110,25 +110,63 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
                   {isOpen && <span className="ml-3">Reports</span>}
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/adminDashboard/allOrders"
+                  className={({ isActive }) =>
+                    `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
+                      isActive ? "bg-gray-700" : ""
+                    }`
+                  }
+                >
+                  <BiPurchaseTag />
+                  {isOpen && <span className="ml-3">Orders</span>}
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to="/customerDashboard/allOrders"
+                  className={({ isActive }) =>
+                    `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
+                      isActive ? "bg-gray-700" : ""
+                    }`
+                  }
+                >
+                  <BiPurchaseTag />
+                  {isOpen && <span className="ml-3">My Orders</span>}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/cart"
+                  className={({ isActive }) =>
+                    `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
+                      isActive ? "bg-gray-700" : ""
+                    }`
+                  }
+                >
+                  <FaShoppingCart />
+                  {isOpen && <span className="ml-3">Shopping Cart</span>}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
+                      isActive ? "bg-gray-700" : ""
+                    }`
+                  }
+                >
+                  <BiHistory />
+                  {isOpen && <span className="ml-3">My Profile</span>}
+                </NavLink>
+              </li>
             </>
           )}
-          <li>
-            <NavLink
-              to={
-                userRole === "admin"
-                  ? "/adminDashboard/allOrders"
-                  : "/customerDashboard/allOrders"
-              }
-              className={({ isActive }) =>
-                `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
-                  isActive ? "bg-gray-700" : ""
-                }`
-              }
-            >
-              <BiPurchaseTag />
-              {isOpen && <span className="ml-3">Orders</span>}
-            </NavLink>
-          </li>
         </ul>
       </nav>
     </div>

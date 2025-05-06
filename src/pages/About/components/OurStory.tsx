@@ -1,18 +1,18 @@
 
 export default function OurStory() {
   return (
-      <section className="my-16">
-      <div className="flex flex-col md:flex-row items-center gap-12 px-6 lg:px-12">
-        <div className="w-full md:w-1/3 lg:w-1/2">
+      <section className="w-[90%] mx-auto my-16">
+      <div className="flex flex-col md:flex-row gap-12">
+        <div className="w-full h-[300px] md:w-1/3 lg:w-1/2">
           <img
             src="https://i.ibb.co.com/jksD8Fyc/person2.jpg"
             alt="Our Journey"
-            className="w-full h-full rounded-2xl shadow-lg"
+            className="w-full h-full object-cover rounded-md shadow-lg"
           />
         </div>
 
         <div className="w-full md:w-2/3 lg:w-1/2 text-center md:text-left">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 font-mono">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4 font-mono border-b-4 border-primary w-fit pb-1">
             Our Story🚴‍♂️
           </h2>
                   <div className="text-lg leading-relaxed md:text-sm lg:text-lg">

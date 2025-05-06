@@ -117,12 +117,12 @@ export default function Products() {
             </h1>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex items-center justify-between bg-gray-100 rounded-full w-full md:w-60"
+              className="flex items-center justify-between bg-gray-100 rounded-full w-full md:w-56"
             >
               <input
                 type="text"
                 placeholder="Search here..."
-                className="w-[90%] md:w-52 bg-transparent px-3 focus:outline-none"
+                className="w-[90%] md:w-36 bg-transparent px-3 focus:outline-none"
                 {...register("search", { required: false })}
               />
               <input
