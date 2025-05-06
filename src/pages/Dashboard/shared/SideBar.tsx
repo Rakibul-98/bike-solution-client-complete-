@@ -3,10 +3,11 @@ import { AiFillProduct, AiOutlineMenuUnfold } from "react-icons/ai";
 import { BiPurchaseTag } from "react-icons/bi";
 import { FaChartPie, FaUsers } from "react-icons/fa";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { NavLink } from "react-router-dom"; 
+import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../../redux/features/hooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { StateType } from "../../../interfaces/interfaces";
+import { GrAppsRounded } from "react-icons/gr";
 
 const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
   const loggedInUser = useAppSelector(selectCurrentUser);
@@ -28,7 +29,7 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
       }`}
     >
       {/* Sidebar Header with Toggle Button */}
-      <div className="flex items-center justify-between py-3 px-4 bg-red-400">
+      <div className="flex items-center justify-between py-3 px-4 bg-primary">
         {isOpen && (
           <span className="text-md lg:text-lg font-semibold whitespace-nowrap">
             {userRole === "admin" ? "Admin Panel" : "Customer Panel"}
@@ -36,7 +37,9 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
         )}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`text-white text-xl ${!isOpen && "w-full flex justify-center"}`}
+          className={`text-white text-xl ${
+            !isOpen && "w-full flex justify-center"
+          }`}
         >
           {isOpen ? (
             <RiCloseLargeFill className="ms-5" />
@@ -47,10 +50,27 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
       </div>
 
       {/* Sidebar Menu */}
-      <nav className={`${!isOpen && " text-2xl flex justify-center items-center"} mt-4`}>
+      <nav
+        className={`${
+          !isOpen && " text-2xl flex justify-center items-center"
+        } mt-4`}
+      >
         <ul className="space-y-2 pt-1">
           {userRole === "admin" && (
             <>
+              <li>
+                <NavLink
+                  to="/adminDashboard/overview"
+                  className={({ isActive }) =>
+                    `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
+                      isActive ? "bg-gray-700" : ""
+                    }`
+                  }
+                >
+                  <GrAppsRounded />
+                  {isOpen && <span className="ml-3">Overview</span>}
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/adminDashboard/allProducts"
@@ -94,7 +114,11 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
           )}
           <li>
             <NavLink
-              to={userRole === "admin" ? "/adminDashboard/allOrders" : "/customerDashboard/allOrders"}
+              to={
+                userRole === "admin"
+                  ? "/adminDashboard/allOrders"
+                  : "/customerDashboard/allOrders"
+              }
               className={({ isActive }) =>
                 `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
                   isActive ? "bg-gray-700" : ""
@@ -109,7 +133,6 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
       </nav>
     </div>
   );
-}
-
+};
 
 export default SideBar;

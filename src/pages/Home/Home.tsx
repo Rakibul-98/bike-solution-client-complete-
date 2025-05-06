@@ -6,7 +6,7 @@ import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import Promotion from "./components/Promotion";
 import PromotionalVideo from "./components/PromotionalVideo";
-import Testimonial from "./components/TEstimonial";
+import Testimonial from "./components/Testimonial";
 import GoTop from "./GoTop";
 
 export default function Home() {

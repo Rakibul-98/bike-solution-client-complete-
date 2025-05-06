@@ -19,6 +19,7 @@ import CustomerDashboard from "../pages/Dashboard/CustomerDashboard/CustomerDash
 import ProtectedRoute from "../layout/ProtectedRoute";
 import UserProfile from "../pages/UserProfile/UserProfile";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
+import Overview from "../pages/Dashboard/Admin/components/Overview/Overview";
 
 const router = createBrowserRouter([
   {
@@ -75,7 +76,8 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <AllProducts /> },
+          { index: true, element: <Overview /> },
+          { path: "overview", element: <Overview /> },
           { path: "allProducts", element: <AllProducts /> },
           { path: "allUsers", element: <AllUsers /> },
           { path: "allOrders", element: <AllOrders /> },
