@@ -21,16 +21,16 @@ export default function ProductDetails() {
     error: allProductsError,
     isLoading: isAllProductsLoading,
   } = useGetAllProductsQuery(undefined);
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(5);
 
   useEffect(() => {
     const updateVisibleCount = () => {
       if (window.innerWidth < 768) {
-        setVisibleCount(4);
+        setVisibleCount(5);
       } else if (window.innerWidth < 1024) {
-        setVisibleCount(3);
-      } else {
         setVisibleCount(4);
+      } else {
+        setVisibleCount(5);
       }
     };
 
@@ -60,13 +60,13 @@ export default function ProductDetails() {
   );
 
   return (
-    <div className="my-10">
+    <div className="w-[91%] mx-auto my-10">
       {!isProductLoading && <DetailsCard productData={product?.data} />}
       <div>
-        <h2 className="font-mono font-semibold text-2xl mt-10 mb-3">
+        <h2 className="font-mono font-semibold mt-10 text-3xl mb-5 border-b-4 border-primary w-fit">
           Products You May Like
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {isAllProductsLoading
             ? Array.from({ length: visibleCount }).map((_, index) => (
                 <div

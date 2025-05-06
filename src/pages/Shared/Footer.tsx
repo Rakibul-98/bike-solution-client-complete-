@@ -45,7 +45,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-primary py-10">
-      <div className="w-[92%] mx-auto md:flex justify-between gap-10">
+      <div className="w-[90%] mx-auto md:flex justify-between gap-10">
         <div className="w-full md:w-[30%] mb-6 lg:mb-0">
           <div className="flex flex-col items-center md:items-start">
             <div>

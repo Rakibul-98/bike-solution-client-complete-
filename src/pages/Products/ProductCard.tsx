@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ItemType } from "../../interfaces/interfaces";
 import Tilt from "react-parallax-tilt";
+import AddToCartButton from "../Shared/NavBar/AddToCartButton";
 
 export default function ProductCard({ product }: { product: ItemType }) {
   const { _id, brand, category, description, name, price, product_image } =
@@ -14,8 +15,7 @@ export default function ProductCard({ product }: { product: ItemType }) {
   return (
     <Tilt>
       <div
-        onClick={() => handleShowDetails(_id)}
-        className="cursor-pointer group"
+        className=" group"
       >
         <div className="card bg-base-100 shadow-md group-hover:shadow-xl rounded-md overflow-hidden flex flex-col h-full hover:scale-105">
           <div className="badge absolute top-2 right-2 badge-primary text-base-100">
@@ -28,7 +28,7 @@ export default function ProductCard({ product }: { product: ItemType }) {
               src={product_image}
               alt={name}
             />
-            <p className="opacity-0 group-hover:opacity-100 absolute -bottom-[2px] transition-opacity duration-500 bg-primary w-full text-center py-2 font-medium">Show Details</p>
+            <p onClick={() => handleShowDetails(_id)} className="cursor-pointer opacity-0 group-hover:opacity-100 absolute -bottom-[2px] transition-opacity duration-500 bg-primary w-full text-center py-2 font-medium">Show Details</p>
           </figure>
 
           <div className="card-body p-2 flex flex-col flex-grow">
@@ -46,6 +46,7 @@ export default function ProductCard({ product }: { product: ItemType }) {
             <div className="font-semibold">
               Price: <span className="text-xs text-secondary">$ {price.toFixed(2)}</span>
             </div>
+            <AddToCartButton className="hidden" product={product}/>
           </div>
         </div>
       </div>

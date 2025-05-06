@@ -7,10 +7,11 @@ import Newsletter from "./components/Newsletter";
 import Promotion from "./components/Promotion";
 import PromotionalVideo from "./components/PromotionalVideo";
 import Testimonial from "./components/TEstimonial";
+import GoTop from "./GoTop";
 
 export default function Home() {
   return (
-    <div>
+    <div className="relative">
       <Banner />
       <FeaturedProducts />
       <PromotionalVideo />
@@ -20,6 +21,7 @@ export default function Home() {
       <Blogs />
       <FAQ />
       <Newsletter />
+      <GoTop/>
     </div>
   );
 }
