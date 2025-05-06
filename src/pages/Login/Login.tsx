@@ -21,13 +21,15 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<formDataType>({
     defaultValues: {
-      email: "user@example.com",
-      password: "12345",
+      email: "",
+      password: "",
     },
   });
+
   const [login] = useLoginMutation();
 
   const onSubmit: SubmitHandler<formDataType> = async (data) => {
@@ -54,18 +56,42 @@ export default function Login() {
     }
   };
 
-  return (
-    <div className="my-10 min-h-[80vh] flex items-center justify-center px-4">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row max-w-4xl w-full border">
-        <div className="md:w-1/2 hidden md:flex items-center justify-center bg-gray-50 p-8">
-          <img src={loginImg} alt="Login" className="w-80" />
-        </div>
+  const handleUserLoginFill = () => {
+    setValue("email", "user@example.com");
+    setValue("password", "12345");
+  };
 
-        <div className="md:w-1/2 w-full p-8">
-          <h2 className="text-2xl font-bold text-gray-700 text-center mb-6">
+  const handleAdminLoginFill = () => {
+    setValue("email", "admin@example.com");
+    setValue("password", "123456");
+  };
+
+  return (
+    <div className="w-[91%] mx-auto my-5 min-h-[70vh] md:flex justify-center">
+      <div className="md:w-1/2 ">
+        <img src={loginImg} alt="Login" className="w-[90%] mx-auto md:ms-0 md:w-[70%]" />
+      </div>
+      <div className=" flex items-center justify-center">
+        <div className=" shadow-lg rounded-lg p-8 h-fit">
+          <h2 className="text-4xl font-bold text-center mb-6 ">
             Welcome Back! 👋
           </h2>
-
+          <div className="flex gap-3 my-3">
+            <button
+              type="button"
+              onClick={handleUserLoginFill}
+              className="w-1/2 hover:bg-secondary hover:text-base-100 border border-secondary text-secondary px-4 py-1 rounded-md"
+            >
+              User Login
+            </button>
+            <button
+              type="button"
+              onClick={handleAdminLoginFill}
+              className="w-1/2 hover:bg-secondary hover:text-base-100 border border-secondary text-secondary px-4 py-1 rounded-md"
+            >
+              Admin Login
+            </button>
+          </div>
           <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label>User email</label>
@@ -92,7 +118,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+              className="w-full bg-primary/80 text-base-100 py-2 rounded-lg hover:bg-primary transition duration-300"
             >
               Login
             </button>
@@ -100,7 +126,10 @@ export default function Login() {
 
           <p className="text-center text-gray-600 mt-4">
             Don't have an account?{" "}
-            <Link to="/register" className="text-blue-500 hover:underline">
+            <Link
+              to="/register"
+              className="text-secondary underline hover:no-underline"
+            >
               Sign Up
             </Link>
           </p>

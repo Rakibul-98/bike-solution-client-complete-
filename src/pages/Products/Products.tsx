@@ -55,9 +55,8 @@ export default function Products() {
     if (itemsPerPage) {
       filters.push({ name: "limit", value: itemsPerPage });
     }
-
     if (search) {
-      filters.push({ name: "search", value: search.search });
+      filters.push({ name: "search", value: search });
     }
 
     return filters;
@@ -123,7 +122,7 @@ export default function Products() {
               <input
                 type="text"
                 placeholder="Search here..."
-                className="w-24 md:w-28 bg-transparent px-3 focus:outline-none"
+                className="w-[90%] md:w-52 bg-transparent px-3 focus:outline-none"
                 {...register("search", { required: false })}
               />
               <input
