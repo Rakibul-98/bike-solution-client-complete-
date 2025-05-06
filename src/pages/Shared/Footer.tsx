@@ -11,7 +11,7 @@ export default function Footer() {
     },
     {
       title: "Legal",
-      links: ["Terms of use", "Privacy policy"],
+      links: ["Terms of use"],
     },
   ];
 
@@ -72,8 +72,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="w-full md:w-[70%] md:flex justify-between">
-          <div className="w-full flex justify-around md:justify-normal gap-10 mb-5 md:mb-0 items-center">
+        <div className="w-full md:w-[70%] md:flex justify-between ">
+          <div className="w-full flex justify-around md:justify-normal gap-10 mb-5 md:mb-0">
           {footerLinks.map((section, i) => (
             <nav key={i}>
               <h6 className="footer-title">{section.title}</h6>

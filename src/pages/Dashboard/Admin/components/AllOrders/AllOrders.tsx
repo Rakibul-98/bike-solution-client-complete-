@@ -115,9 +115,9 @@ export default function AllOrders() {
                 <td className="px-4 py-3 text-sm text-gray-700">{order?.customer?.user_name}</td>
                 <td className="px-4 py-3 text-sm text-gray-700">${order.totalAmount}</td>
                 <td className="px-4 py-3 text-sm text-gray-700">{new Date(order.createdAt).toLocaleString()}</td>
-                <td className="px-4 py-3 text-sm">
+                <td className="px-4 py-3">
                   <span
-                    className={`px-3 py-1 rounded-full text-white text-xs font-semibold uppercase ${
+                    className={`px-3 block lg:w-2/3 text-center py-1 rounded-full text-white text-xs font-semibold uppercase ${
                       order.orderStatus.toLowerCase() === "pending"
                         ? "bg-yellow-500"
                         : order.orderStatus.toLowerCase() === "processing"
@@ -135,14 +135,14 @@ export default function AllOrders() {
                   </span>
                 </td>
                 {loggedInUser?.role === "admin" && (
-                  <td className="px-4 py-3 text-sm">
+                  <td className="px-4 py-3 text-center text-sm">
                     <button
                       onClick={() => {
                         setSelectedOrder(order);
                         const modal = document.getElementById("update-order-status-modal") as HTMLDialogElement;
                         modal?.showModal();
                       }}
-                      className="px-3 py-1 text-sm bg-purple-500 text-white rounded hover:bg-purple-600"
+                      className="px-3 py-1 text-sm bg-secondary/80 text-white rounded hover:bg-secondary"
                     >
                       Update
                     </button>
@@ -167,7 +167,7 @@ export default function AllOrders() {
                     const modal = document.getElementById("order-details-modal") as HTMLDialogElement;
                     modal?.showModal();
                   }}
-                  className="px-3 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600"
+                  className="px-3 py-1 text-xs bg-primary text-white rounded hover:bg-primary/80"
                 >
                   Details
                 </button>
@@ -200,7 +200,7 @@ export default function AllOrders() {
                       const modal = document.getElementById("update-order-status-modal") as HTMLDialogElement;
                       modal?.showModal();
                     }}
-                    className="px-3 py-1 text-xs bg-purple-500 text-white rounded hover:bg-purple-600"
+                    className="px-3 py-1 text-xs bg-secondary/80 text-white rounded hover:bg-secondary"
                   >
                     Update
                   </button>

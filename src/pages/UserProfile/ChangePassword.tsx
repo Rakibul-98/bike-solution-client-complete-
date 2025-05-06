@@ -52,7 +52,7 @@ export default function ChangePassword() {
     <div className="mt-6">
           <button
             onClick={() => setIsChangingPassword(!isChangingPassword)}
-            className="flex items-center justify-center gap-2 w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            className="flex items-center justify-center gap-2 w-full py-2 bg-primary text-base-100 rounded-lg hover:bg-primary/80"
           >
             <FiLock />
             Change Password

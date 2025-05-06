@@ -6,7 +6,9 @@ export default function MainLayout() {
   return (
     <div className="min-h-screen relative bg-neutral">
       <Navbar />
-      <Outlet />
+      <div className="min-h-[80vh]">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

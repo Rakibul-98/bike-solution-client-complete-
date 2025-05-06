@@ -30,7 +30,7 @@ export default function CartItem({ item }: CartItemProps) {
     };
     
   return (
-    <div className="cart-item bg-gray-100 flex gap-5 mb-5 rounded-md lg:w-[80%] shadow-lg text-sm md:base" key={item._id}>
+    <div className="cart-item  flex gap-5 mb-5 rounded-md lg:w-[80%] shadow-lg text-sm md:base" key={item._id}>
           <figure>
           <img src={item.product_image} alt={item.name} className="item-image w-28 h-20 rounded-s-md" />
         </figure>

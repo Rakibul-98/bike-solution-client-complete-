@@ -20,6 +20,8 @@ import ProtectedRoute from "../layout/ProtectedRoute";
 import UserProfile from "../pages/UserProfile/UserProfile";
 import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 import Overview from "../pages/Dashboard/Admin/components/Overview/Overview";
+import Terms from "../pages/Terms/Terms";
+import Services from "../pages/Services/Services";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      { path: "terms-of-use", element: <Terms /> },
+      { path: "services", element: <Services /> },
       { path: "productDetails/:productId", element: <ProductDetails /> },
 
       {

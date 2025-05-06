@@ -43,7 +43,7 @@ export default function OrderSummary() {
   };
 
   return (
-    <div className="cart-summary bg-gray-100 p-5 rounded-md shadow-lg">
+    <div className="cart-summary p-5 rounded-md shadow-lg">
       <h2 className="text-center font-serif text-2xl font-medium">Order Summary</h2>
       <hr className="h-[2px] bg-gray-600 my-2" />
       <div className="w-10/12 mx-auto font-mono">
@@ -66,11 +66,12 @@ export default function OrderSummary() {
             <input
               className="w-full py-1 px-2 focus:outline-none border rounded"
               type="text"
+              value="SAVE20"
               placeholder="Enter Coupon"
               {...register("coupon")}
             />
             <button
-              className="w-full bg-primary px-3 py-1 text-white rounded cursor-pointer hover:bg-primary-dark"
+              className="w-full bg-primary hover:bg-primary/80 px-3 py-1 text-white rounded cursor-pointer hover:bg-primary-dark"
               type="submit"
             >
               Apply
@@ -108,7 +109,7 @@ export default function OrderSummary() {
               const modal = document.getElementById("clear-cart-modal") as HTMLDialogElement;
               modal?.showModal();
             }}
-            className="w-full sm:w-7/12 bg-red-600 py-2 text-white font-bold rounded"
+            className="w-full sm:w-7/12 bg-red-500 hover:bg-red-600 py-2 text-white font-bold rounded"
           >
             Clear cart
           </button>
@@ -130,7 +131,7 @@ export default function OrderSummary() {
             </div>
           </dialog>
           <Link
-            className="w-full sm:w-7/12 bg-gradient-to-br from-purple-500 to-pink-500 text-center py-2 text-white font-bold rounded"
+            className="w-full sm:w-7/12 bg-secondary/80 hover:bg-secondary text-center py-2 text-white font-bold rounded"
             to="/checkout"
           >
             Checkout

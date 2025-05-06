@@ -99,8 +99,8 @@ export default function AllProducts() {
       <DeleteConfirmModal productId={selectedProductId} />
 
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-        <h1 className="text-2xl font-semibold">All Products</h1>
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-3">
+        <h1 className="text-2xl font-mono font-semibold">All Products</h1>
         <div className="flex items-center gap-4 w-full md:w-auto">
           <form onSubmit={handleSubmit(onSubmit)} className="flex items-center justify-between bg-gray-100 rounded-full w-full md:w-60">
             <input
@@ -110,7 +110,7 @@ export default function AllProducts() {
               {...register("search", { required: false })}
             />
             <input
-              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-full cursor-pointer"
+              className="bg-secondary/80 hover:bg-secondary text-white px-3 py-1 rounded-full cursor-pointer"
               type="submit"
               value="Search"
             />
@@ -206,14 +206,14 @@ export default function AllProducts() {
                   </td>
                 ))}
                 <td className="px-4 py-3 text-sm">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center gap-2">
                     <button
                       onClick={() => {
                         setSelectedProductId(product._id);
                         const modal = document.getElementById('update-product-modal') as HTMLDialogElement;
                         modal?.showModal();
                       }}
-                      className="px-3 py-1 text-sm bg-purple-500 text-white rounded hover:bg-purple-600"
+                      className="px-3 py-1 text-sm bg-secondary/80 text-white rounded hover:bg-secondary"
                     >
                       Update
                     </button>
@@ -265,7 +265,7 @@ export default function AllProducts() {
                     const modal = document.getElementById('update-product-modal') as HTMLDialogElement;
                     modal?.showModal();
                   }}
-                  className="px-3 py-1 text-sm bg-purple-500 text-white rounded hover:bg-purple-600"
+                  className="px-3 py-1 text-sm bg-secondary/80 text-white rounded hover:bg-secondary"
                 >
                   Update
                 </button>
@@ -307,7 +307,7 @@ export default function AllProducts() {
               <button
                 key={page}
                 className={`join-item px-3 py-1 border ${
-                  currentPage === page ? "bg-purple-500 text-white" : ""
+                  currentPage === page ? "bg-secondary text-white" : ""
                 }`}
                 onClick={() => setCurrentPage(page)}
               >

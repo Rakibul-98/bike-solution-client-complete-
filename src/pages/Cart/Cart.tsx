@@ -16,7 +16,7 @@ export default function Cart() {
 
 
   return (
-    <div className="my-5">
+    <div className="w-[91%] min-h-[70vh] mx-auto my-10">
       {
         cartItems.length > 0 && (
           <div className="lg:flex justify-between gap-10">
@@ -42,7 +42,7 @@ export default function Cart() {
           <div>
           <h2 className="text-center text-lg font-bold capitalize">Your cart is empty</h2>
           <Link 
-            className="flex justify-center text-blue-500 hover:underline mt-2" 
+            className="flex justify-center text-secondary hover:underline mt-2" 
             to="/products"
           >
             Add Products

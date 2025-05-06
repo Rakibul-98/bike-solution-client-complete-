@@ -15,7 +15,7 @@ export default function OrderSuccess() {
       </div>
       <Link
         to="/customerDashboard/allOrders"
-        className='capitalize text-blue-500 underline hover:text-blue-700 hover:font-semibold'
+        className='capitalize text-secondary/80 underline hover:text-secondary hover:font-semibold'
       >
         See order history
       </Link>

@@ -27,7 +27,7 @@ export default function AllUsers() {
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <h3 className="text-2xl font-bold mb-6">All Users</h3>
+      <h3 className="text-2xl font-mono font-bold mb-2">All Users</h3>
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto">
@@ -58,7 +58,7 @@ export default function AllUsers() {
                 </td>
                 <td className="px-4 py-3 text-sm">
                   <span
-                    className={`px-3 py-1 rounded-full text-white text-xs font-semibold uppercase ${
+                    className={`px-3 block w-1/2 text-center py-1 rounded-full text-white text-xs font-semibold uppercase ${
                       user?.isBlocked ? "bg-red-500" : "bg-green-500"
                     }`}
                   >
@@ -69,7 +69,7 @@ export default function AllUsers() {
                   <button
                     disabled={user?.isBlocked || user?.role === "admin"}
                     onClick={() => handleBlockUser(user?._id)}
-                    className="px-3 py-1 text-sm bg-purple-500 text-white rounded hover:bg-purple-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    className="px-3 py-1 text-sm bg-secondary/80 text-white rounded hover:bg-secondary disabled:bg-gray-400 disabled:cursor-not-allowed"
                   >
                     Block
                   </button>
@@ -102,7 +102,7 @@ export default function AllUsers() {
               <button
                 disabled={user?.isBlocked || user?.role === "admin"}
                 onClick={() => handleBlockUser(user?._id)}
-                className="w-full px-3 py-1 text-sm bg-purple-500 text-white rounded hover:bg-purple-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="w-full px-3 py-1 text-sm bg-secondary/80 text-white rounded hover:bg-secondary disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 Block
               </button>
