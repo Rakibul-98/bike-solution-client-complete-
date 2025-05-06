@@ -18,10 +18,6 @@ const faqData = [
     question: "Can I change my email address?",
     answer: "Yes, go to profile settings and update your email address after verifying it.",
   },
-  {
-    question: "Is my data secure?",
-    answer: "Absolutely! We use industry-standard encryption to keep your information safe.",
-  },
 ];
 
 export default function FAQ() {
@@ -32,17 +28,16 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-12">
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
-        {/* FAQ List */}
+    <section className="mt-16">
+      <div className="w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
         <div>
-          <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-mono font-semibold mb-4 border-b-4 border-primary w-fit">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqData.map((item, index) => (
               <div
                 key={index}
                 onClick={() => toggle(index)}
-                className="cursor-pointer rounded-lg p-4 shadow-sm transition hover:shadow-md "
+                className="cursor-pointer rounded-lg p-4 shadow-sm transition hover:shadow-md bg-base-100"
               >
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-semibold">{item.question}</h3>
@@ -56,11 +51,11 @@ export default function FAQ() {
           </div>
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex justify-center">
           <img
             src={faq}
             alt="FAQ"
-            className=""
+            className="w-96"
           />
         </div>
       </div>

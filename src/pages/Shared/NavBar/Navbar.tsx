@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const {
     data: user,
-    error,
+    // error,
     isLoading,
   } = useGetUserByEmailQuery(loggedInUser?.user || "", {
     skip: !loggedInUser?.user,
@@ -161,8 +161,7 @@ export default function Navbar() {
         <CartIcon cartItems={cartItems} />
         {isLoading ? (
           <ProfileDropdownSkeleton />
-        ) : error ? (
-          <p className="text-red-500 text-sm">Failed to load</p>
+        
         ) : user ? (
           <ProfileDropdown user={user.data} handleLogout={handleLogout} />
         ) : (
@@ -250,8 +249,6 @@ export default function Navbar() {
               <li>
                 <ProfileDropdownSkeleton />
               </li>
-            ) : error ? (
-              <li className="text-red-500 text-sm">Failed to load</li>
             ) : user ? (
               <li className="text-center">
                 <ProfileDropdown user={user.data} handleLogout={handleLogout} />

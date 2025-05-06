@@ -14,7 +14,6 @@ export default function Home() {
       <Banner />
       <FeaturedProducts />
       <PromotionalVideo />
-
       <Promotion />
       <Brands />
       <Testimonial />

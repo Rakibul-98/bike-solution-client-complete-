@@ -54,11 +54,13 @@ const blogPosts = [
 
 export default function Blogs() {
   return (
-    <div className="py-10">
-      <h1 className="text-3xl font-mono font-semibold my-3 text-center">
-        Latest Blog Posts
-      </h1>
-      <p className="text-lg text-gray-600 text-center mb-5">
+    <div className="w-[92%] mx-auto mt-16">
+      <div className="flex justify-center">
+        <h1 className="text-3xl font-mono font-semibold mb-2 border-b-4 border-primary px-2">
+          Latest Blog Posts
+        </h1>
+      </div>
+      <p className=" text-center mb-5">
         Stay updated with the latest trends and tips from the biking world.
       </p>
 
@@ -66,23 +68,25 @@ export default function Blogs() {
         {blogPosts.map((post) => (
           <div
             key={post.id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl flex flex-col"
+            className="bg-base-100 shadow-lg rounded-lg overflow-hidden hover:shadow-2xl flex flex-col"
           >
             <img
               src={post.image}
               alt={post.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-40 object-cover"
             />
 
-            <div className="p-4 flex flex-col flex-1">
-              <div className="flex items-center text-gray-500 text-sm mb-2">
+            <div className="py-2 px-4 flex flex-col flex-1">
+              <div className="flex items-center text-gray-500 text-sm">
                 <span>
                   {post.date} • {post.author}
                 </span>
               </div>
 
-              <h2 className="text-xl font-semibold mb-2 text-ellipsis line-clamp-1">{post.title}</h2>
-              <p className="text-gray-600 text-sm overflow-hidden text-ellipsis mb-4 line-clamp-2">
+              <h2 className="text-xl font-semibold my-2 text-ellipsis line-clamp-1">
+                {post.title}
+              </h2>
+              <p className="text-gray-600 text-sm overflow-hidden text-ellipsis mb-3 line-clamp-2">
                 {post.description}
               </p>
 
@@ -90,9 +94,9 @@ export default function Blogs() {
                 <Link
                   to={post.link}
                   target="_blank"
-                  className="text-blue-600 font-medium hover:underline"
+                  className="text-primary underline hover:text-secondary font-medium hover:underline"
                 >
-                  Read More
+                  Read More ...
                 </Link>
 
                 <div className="flex items-center gap-1 text-gray-500 text-sm">

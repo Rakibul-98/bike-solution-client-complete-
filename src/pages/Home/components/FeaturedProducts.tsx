@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProductCard from "../../Products/ProductCard";
 import { Link } from "react-router-dom";
 import { ItemType } from "../../../interfaces/interfaces";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function FeaturedProducts() {
   const { data, isLoading, error } = useGetAllProductsQuery(undefined);
@@ -24,7 +25,7 @@ export default function FeaturedProducts() {
     return () => window.removeEventListener("resize", updateVisibleCount);
   }, []);
 
-  if (error) return <p>Failed to load products.</p>;
+  // if (error) return <p>Failed to load products.</p>;
 
   const products: ItemType[] = data?.data?.result || [];
 
@@ -33,18 +34,18 @@ export default function FeaturedProducts() {
   const skeletonCount = visibleCount - selectedProducts.length;
 
   return (
-    <div className="my-10">
+    <div className="mt-10 w-[92%] mx-auto">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-mono font-semibold mb-4">Featured Products</h2>
-        <Link className="flex gap-1 items-center hover:text-blue-500" to="/products">View All</Link>
+        <h2 className="text-3xl font-mono font-semibold mb-4 border-b-4 border-primary">Featured Products</h2>
+        <Link className="flex items-center gap-2 border py-[2px] px-3 rounded-badge border-secondary text-secondary duration-300 transition-colors hover:badge-secondary hover:text-base-100" to="/products">View All <FaArrowRightLong /> </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {selectedProducts.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
 
-        {(isLoading || skeletonCount > 0) &&
+        {(isLoading || error || skeletonCount > 0) &&
           Array.from({ length: isLoading ? visibleCount : skeletonCount }).map((_, index) => (
             <div
               key={`skeleton-${index}`}

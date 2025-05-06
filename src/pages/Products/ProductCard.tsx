@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { ItemType } from "../../interfaces/interfaces";
+import Tilt from "react-parallax-tilt";
 
 export default function ProductCard({ product }: { product: ItemType }) {
-  const { _id, brand, category, description, name, price, product_image } = product;
+  const { _id, brand, category, description, name, price, product_image } =
+    product;
   const navigate = useNavigate();
 
   const handleShowDetails = (id: string) => {
@@ -10,31 +12,43 @@ export default function ProductCard({ product }: { product: ItemType }) {
   };
 
   return (
-    <div onClick={() => handleShowDetails(_id)} className="cursor-pointer group">
-      <div className="card bg-base-100 shadow-md group-hover:shadow-xl hover:ring-2 hover:ring-green-500 rounded-md overflow-hidden flex flex-col h-full">
-        <div className="badge absolute top-2 right-2 badge-secondary">NEW</div>
-        
-        <figure className="w-full h-40">
-          <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-            src={product_image}
-            alt={name}
-          />
-        </figure>
+    <Tilt>
+      <div
+        onClick={() => handleShowDetails(_id)}
+        className="cursor-pointer group"
+      >
+        <div className="card bg-base-100 shadow-md group-hover:shadow-xl rounded-md overflow-hidden flex flex-col h-full hover:scale-105">
+          <div className="badge absolute top-2 right-2 badge-primary text-base-100">
+            NEW
+          </div>
 
-        <div className="card-body bg-red-100 p-2 flex flex-col flex-grow">
-          <h2 className="text-lg font-semibold flex justify-between">
-            {name}
-            <div className="badge badge-neutral">{category}</div>
-          </h2>
-          <p className="text-sm text-gray-700"><span className="font-semibold">Brand:</span> {brand}</p>
-          <p className="text-sm text-gray-600 overflow-hidden whitespace-nowrap text-ellipsis">
-            {description}
-          </p>
+          <figure className="w-full h-40 relative">
+            <img
+              className="w-full h-full object-cover transition-all duration-500"
+              src={product_image}
+              alt={name}
+            />
+            <p className="opacity-0 group-hover:opacity-100 absolute -bottom-[2px] transition-opacity duration-500 bg-primary w-full text-center py-2 font-medium">Show Details</p>
+          </figure>
 
-          <div className="font-semibold text-gray-800">Price: <span className="text-xs">$ {price.toFixed(2)}</span></div>
+          <div className="card-body p-2 flex flex-col flex-grow">
+            <h2 className="text-lg font-semibold flex justify-between text-secondary">
+              {name}
+              <div className="badge badge-link">{category}</div>
+            </h2>
+            <p className="text-sm">
+              <span className="font-semibold">Brand:</span> {brand}
+            </p>
+            <p className="text-sm  overflow-hidden whitespace-nowrap text-ellipsis">
+              {description}
+            </p>
+
+            <div className="font-semibold">
+              Price: <span className="text-xs text-secondary">$ {price.toFixed(2)}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </Tilt>
   );
 }
