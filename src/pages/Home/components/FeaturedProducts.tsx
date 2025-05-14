@@ -25,16 +25,12 @@ export default function FeaturedProducts() {
     return () => window.removeEventListener("resize", updateVisibleCount);
   }, []);
 
-  // if (error) return <p>Failed to load products.</p>;
-
   const products: ItemType[] = data?.data?.result || [];
-
   const selectedProducts = products.slice(0, visibleCount);
-
   const skeletonCount = visibleCount - selectedProducts.length;
 
   return (
-    <div className="mt-10 w-[92%] mx-auto">
+    <div className="mt-14 w-[92%] mx-auto">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-mono font-semibold mb-4 border-b-4 border-primary">Featured Products</h2>
         <Link className="flex items-center gap-2 border py-[2px] px-3 rounded-badge border-secondary text-secondary duration-300 transition-colors hover:badge-secondary hover:text-base-100" to="/products">View All <FaArrowRightLong /> </Link>

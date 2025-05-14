@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useLocation, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/features/hooks";
 import {
   logout,
@@ -20,19 +20,25 @@ import { IoIosArrowDown } from "react-icons/io";
 export default function Navbar() {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const loggedInUser = useAppSelector(selectCurrentUser);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
+  const currentCategory = searchParams.get("category");
 
   const {
     data: user,
-    // error,
     isLoading,
   } = useGetUserByEmailQuery(loggedInUser?.user || "", {
     skip: !loggedInUser?.user,
   });
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close category menu when a category is selected
+  useEffect(() => {
+    setShowCategoryMenu(false);
+  }, [currentCategory]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -45,16 +51,23 @@ export default function Navbar() {
 
   const navLinks = [
     { to: "/products", label: "Products" },
-    { to: "/category", label: "Category" },
+    { to: "#", label: "Category" },
     { to: "/services", label: "Services" },
     { to: "/gallery", label: "Gallery" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
   ];
 
+  const categories = [
+    { name: "Mountain", param: "Mountain" },
+    { name: "Road", param: "Road" },
+    { name: "Hybrid", param: "Hybrid" },
+    { name: "Electric", param: "Electric" },
+  ];
+
   return (
     <div className="sticky top-0 z-50 bg-primary shadow-lg">
-      <div className="w-[91%] mx-auto flex justify-between items-center  py-3  text-base-100">
+      <div className="w-[91%] mx-auto flex justify-between items-center py-3 text-base-100">
         <NavLink to="/">
           <img className="h-10" src={logo} alt="logo" />
         </NavLink>
@@ -82,7 +95,9 @@ export default function Navbar() {
                 {link.label === "Category" ? (
                   <span
                     onClick={() => setShowCategoryMenu(!showCategoryMenu)}
-                    className={` px-1 text-lg cursor-default flex items-center gap-2`}
+                    className={`px-1 text-lg cursor-default flex items-center gap-2 ${
+                      currentCategory ? "text-secondary font-semibold" : ""
+                    }`}
                   >
                     {link.label}
                     <span
@@ -113,38 +128,21 @@ export default function Navbar() {
                 {link.label === "Category" && showCategoryMenu && (
                   <div className="absolute -left-5 top-11 bg-secondary w-52 z-50">
                     <ul className="space-y-2 text-center">
-                      <li>
-                        <NavLink
-                          to="/category/sport"
-                          className="hover:text-primary"
-                        >
-                          Sport Bikes
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to="/category/cruiser"
-                          className="hover:text-primary"
-                        >
-                          Cruisers
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to="/category/scooter"
-                          className="hover:text-primary"
-                        >
-                          Scooters
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to="/category/electric"
-                          className="hover:text-primary"
-                        >
-                          Electric
-                        </NavLink>
-                      </li>
+                      {categories.map((category) => (
+                        <li key={category.param}>
+                          <NavLink
+                            to={`/products?category=${category.param}`}
+                            className={`block py-2 hover:text-primary ${
+                              currentCategory === category.param
+                                ? "text-seconsary font-semibold bg-primary"
+                                : ""
+                            }`}
+                            onClick={() => setShowCategoryMenu(false)}
+                          >
+                            {category.name}
+                          </NavLink>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 )}
@@ -165,7 +163,7 @@ export default function Navbar() {
               to="/login"
               state={{ from: location.pathname }}
               className={({ isActive }) =>
-                `px-4 py-1 text-sm uppercase rounded transition duration-300 border border-secondary   font-bold ${
+                `px-4 py-1 text-sm uppercase rounded transition duration-300 border border-secondary font-bold ${
                   isActive
                     ? "bg-transparent border-base-100"
                     : "bg-secondary hover:bg-primary hover:text-secondary/90"
@@ -176,7 +174,8 @@ export default function Navbar() {
             </NavLink>
           )}
         </div>
-        {/* Mobile Cart and Profile */}
+
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden absolute top-16 right-0 z-50 bg-secondary w-[50%] md:w-[30%] py-1">
             <ul className="space-y-1">
@@ -185,45 +184,33 @@ export default function Navbar() {
                   {link.label === "Category" ? (
                     <>
                       <button
-                        className="w-full px-4 py-2 hover:bg-primary"
+                        className={`w-full flex justify-center px-4 py-2 hover:bg-primary text-left ${
+                          currentCategory ? " font-semibold" : ""
+                        }`}
                         onClick={() => setShowCategoryMenu(!showCategoryMenu)}
                       >
                         {link.label}
                       </button>
                       {showCategoryMenu && (
-                        <ul className=" px-4 py-2 space-y-2 border-l-2 border-primary text-center bg-primary">
-                          <li className="hover:bg-secondary">
-                            <NavLink
-                              to="/category/sport"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              Sport Bikes
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              to="/category/cruiser"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              Cruisers
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              to="/category/scooter"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              Scooters
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              to="/category/electric"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              Electric
-                            </NavLink>
-                          </li>
+                        <ul className="px-4 py-2 space-y-2 border-l-2 border-primary text-center bg-primary">
+                          {categories.map((category) => (
+                            <li key={category.param}>
+                              <NavLink
+                                to={`/products?category=${category.param}`}
+                                className={`block py-1 hover:text-secondary ${
+                                  currentCategory === category.param
+                                    ? "text-secondary font-semibold"
+                                    : ""
+                                }`}
+                                onClick={() => {
+                                  setShowCategoryMenu(false);
+                                  setIsMobileMenuOpen(false);
+                                }}
+                              >
+                                {category.name}
+                              </NavLink>
+                            </li>
+                          ))}
                         </ul>
                       )}
                     </>

@@ -23,6 +23,7 @@ import Overview from "../pages/Dashboard/Admin/components/Overview/Overview";
 import Terms from "../pages/Terms/Terms";
 import Services from "../pages/Services/Services";
 import Gallery from "../pages/Gallery/Gallery";
+import CustomerReports from "../pages/Dashboard/CustomerDashboard/CustomerReports";
 
 const router = createBrowserRouter([
   {
@@ -99,7 +100,8 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <AllOrders /> },
+          { index: true, element: <CustomerReports /> },
+          { path: "customerReport", element: <CustomerReports /> },
           { path: "allOrders", element: <AllOrders /> },
         ],
       },

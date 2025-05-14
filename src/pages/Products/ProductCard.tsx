@@ -18,7 +18,7 @@ export default function ProductCard({ product }: { product: ItemType }) {
         className=" group"
       >
         <div className="card bg-base-100 shadow-md group-hover:shadow-xl rounded-md overflow-hidden flex flex-col h-full hover:scale-105">
-          <div className="badge absolute top-2 right-2 badge-primary text-base-100">
+          <div className="badge absolute top-1 right-1 badge-primary text-base-100 z-50">
             NEW
           </div>
 

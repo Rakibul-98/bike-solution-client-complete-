@@ -1,19 +1,23 @@
 import { useForm } from "react-hook-form";
 import newsletter from '../../../assets/svg/newsletter.svg';
+import toast from "react-hot-toast";
 
 type NewsletterFormData = {
     email: string;
   };
 
 export default function Newsletter() {
-  const { register, handleSubmit } = useForm<NewsletterFormData>();
+  const { register, handleSubmit, reset } = useForm<NewsletterFormData>();
 
   const onSubmit = (data: NewsletterFormData) => {
-    console.log("Newsletter Form Data:", data);
+    if (data) {
+      toast.success("Thanks for connect with us!");
+      reset();
+    }
   };
 
   return (
-    <section className="w-[92%] mx-auto mt-5 mb-10">
+    <section className="w-[92%] mx-auto my-10">
       <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div>
           <img

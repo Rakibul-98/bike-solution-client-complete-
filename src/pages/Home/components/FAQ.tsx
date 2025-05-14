@@ -28,7 +28,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="mt-16">
+    <section className="mt-20">
       <div className="w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 ">
         <div>
           <h2 className="text-3xl font-mono font-semibold mb-4 border-b-4 border-primary w-fit">Frequently Asked Questions</h2>

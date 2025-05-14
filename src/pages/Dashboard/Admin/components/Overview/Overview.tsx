@@ -1,8 +1,13 @@
 import { useGetAllOrdersQuery } from "../../../../../redux/features/orders/ordersApi";
 import { useGetAllProductsQuery } from "../../../../../redux/features/products/productsApi";
 import { useGetAllUsersQuery } from "../../../../../redux/features/users/usersApi";
-import { ItemType, OrderType, UserType } from "../../../../../interfaces/interfaces";
+import {
+  ItemType,
+  OrderType,
+  UserType,
+} from "../../../../../interfaces/interfaces";
 import { useMemo } from "react";
+import Charts from "./Charts";
 
 export default function Overview() {
   const {
@@ -25,8 +30,11 @@ export default function Overview() {
 
   const totalRevenue = useMemo(() => {
     if (!orders?.data) return 0;
-  
-    return orders.data.reduce((acc:number, order:OrderType) => acc + (order.totalAmount || 0), 0);
+
+    return orders.data.reduce(
+      (acc: number, order: OrderType) => acc + (order.totalAmount || 0),
+      0
+    );
   }, [orders]);
 
   const totalProducts =
@@ -87,7 +95,10 @@ export default function Overview() {
     <div className="">
       <div className="grid grid-cols-2 md:grid-cols-4  gap-4 mb-3">
         {stats.map(({ title, value, color }, index) => (
-          <div key={index} className="shadow-xl p-4 rounded-lg text-center w-full h-40 flex flex-col justify-center">
+          <div
+            key={index}
+            className="shadow-xl p-4 rounded-lg text-center w-full h-40 flex flex-col justify-center"
+          >
             <h2 className="text-lg font-semibold">{title}</h2>
             <p className={`text-4xl font-mono font-bold ${color}`}>
               {value ?? "Loading..."}
@@ -95,7 +106,11 @@ export default function Overview() {
           </div>
         ))}
       </div>
-      <div className="overflow-x-auto">
+      <Charts
+        products={products?.data?.result ?? []}
+        orders={orders?.data ?? []}
+      />
+      <div className="overflow-x-auto py-5">
         <h3 className="text-2xl font-mono mb-1">Latest Products</h3>
         <table className="min-w-full bg-white">
           <thead className="bg-gray-100">
@@ -199,8 +214,8 @@ export default function Overview() {
           </tbody>
         </table>
       </div>
-      <div className="overflow-x-auto mt-5">
-      <h3 className="text-2xl font-mono mb-1">Orders</h3>
+      <div className="overflow-x-auto my-8">
+        <h3 className="text-2xl font-mono mb-1">Orders</h3>
         <table className="min-w-full bg-white">
           <thead className="bg-gray-100">
             <tr>
@@ -215,16 +230,14 @@ export default function Overview() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {orders?.data?.slice(0,4).map((order: OrderType) => (
+            {orders?.data?.slice(0, 4).map((order: OrderType) => (
               <tr
                 key={order._id}
                 className="hover:bg-gray-50 transition-colors"
               >
                 <td className="px-4 py-3 text-sm text-gray-700">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold">
-                      {order._id}
-                    </h4>
+                    <h4 className="font-semibold">{order._id}</h4>
                   </div>
                 </td>
                 <td className="px-4 py-3 text-sm text-gray-700">

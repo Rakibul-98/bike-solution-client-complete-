@@ -54,13 +54,13 @@ const blogPosts = [
 
 export default function Blogs() {
   return (
-    <div className="w-[92%] mx-auto mt-16">
+    <div className="w-[92%] mx-auto mt-16 pt-2">
       <div className="flex justify-center">
         <h1 className="text-3xl font-mono font-semibold mb-2 border-b-4 border-primary px-2">
           Latest Blog Posts
         </h1>
       </div>
-      <p className=" text-center mb-5">
+      <p className=" text-center mb-8">
         Stay updated with the latest trends and tips from the biking world.
       </p>
 

@@ -30,9 +30,9 @@ const promotions = [
 
 export default function Promotion() {
   return (
-    <div className="mt-16 w-[92%] mx-auto">
+    <div className="mt-20 w-[92%] mx-auto">
       <div
-        className="relative bg-no-repeat bg-cover lg:bg-center h-64 rounded-lg overflow-hidden flex items-center justify-center lg:justify-end text-center"
+        className="relative bg-no-repeat bg-cover lg:bg-center h-64 rounded-lg overflow-hidden flex items-center justify-center lg:justify-end text-center bg-gray-200"
         style={{
           backgroundImage: "url('https://i.ibb.co.com/20Gsp38b/sale.jpg')",
         }}

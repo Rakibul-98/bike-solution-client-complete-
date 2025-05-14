@@ -75,7 +75,7 @@ export default function UserProfile() {
   if (error) return <p>Failed to load user.</p>;
 
   return (
-    <div className="">
+    <div className="pb-5">
       <div className="h-[20vh]">
         <img className="w-full object-cover h-[45vh] object-center" src={img} alt="" />
       </div>
@@ -166,7 +166,6 @@ export default function UserProfile() {
               </p>
             </div>
 
-            {/* Save Button */}
             {(isEditing.user_name || isEditing.profile_image) && (
               <button
                 type="submit"

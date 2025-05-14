@@ -4,7 +4,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 const testimonials = [
   {
     id: 1,
-    name: "John Doe",
+    name: "Max Jones",
     image: "https://i.pravatar.cc/150?img=3",
     comment:
       "Amazing service! Totally transformed my biking experience. The bike quality exceeded my expectations, and the support team was incredibly helpful throughout the process. I’ve been using it for over 6 months and couldn’t be happier with my purchase.",
@@ -14,7 +14,7 @@ const testimonials = [
   },
   {
     id: 2,
-    name: "Jane Smith",
+    name: "Alia Sloane",
     image: "https://i.pravatar.cc/150?img=5",
     comment:
       "Love the design and smooth ride. Highly recommended! From the packaging to the first ride, everything felt premium. It’s perfect for my daily commute and makes me look forward to going out every morning.",
@@ -24,7 +24,7 @@ const testimonials = [
   },
   {
     id: 3,
-    name: "Ali Khan",
+    name: "Grace Lawson",
     image: "https://i.pravatar.cc/150?img=7",
     comment:
       "Customer service is top-notch. Prompt and professional. I had a minor issue with the brakes, and they resolved it within 24 hours. This level of support is rare these days. The bike rides like a dream—smooth, silent, and stylish.",
@@ -34,7 +34,7 @@ const testimonials = [
   },
   {
     id: 4,
-    name: "Sophia Lee",
+    name: "Avery Chandler",
     image: "https://i.pravatar.cc/150?img=9",
     comment:
       "Stylish and reliable bikes. Couldn’t ask for more. I've tried multiple brands before, but this one stands out. The attention to detail, the durability, and the ease of use make it a clear winner in my book. I’ve already recommended it to all my friends.",
@@ -49,13 +49,12 @@ export default function Testimonial() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Set group size based on screen width
   useEffect(() => {
     const updateGroupSize = () => {
-      setGroupSize(window.innerWidth >= 768 ? 2 : 1); // lg: 1024px+
+      setGroupSize(window.innerWidth >= 768 ? 2 : 1);
     };
 
-    updateGroupSize(); // Initial check
+    updateGroupSize();
     window.addEventListener("resize", updateGroupSize);
     return () => window.removeEventListener("resize", updateGroupSize);
   }, []);
@@ -80,7 +79,7 @@ export default function Testimonial() {
 
   return (
     <div
-      className="w-[92%] mx-auto mt-20"
+      className="w-[92%] mx-auto mt-32"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -101,11 +100,10 @@ export default function Testimonial() {
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-32 h-32 object-cover rounded-md ring ring-secondary ring-offset-2"
+                  className="w-32 h-32 object-cover rounded-md ring ring-secondary ring-offset-2 grayscale"
                 />
               </div>
 
-              {/* Content */}
               <div className="col-span-3 space-y-1">
                 <h4 className="text-lg font-semibold text-secondary">
                   {testimonial.name}

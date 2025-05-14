@@ -36,11 +36,8 @@ const images = [
 
 export default function Banner() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    // if (isPaused) return;
-
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
@@ -53,8 +50,6 @@ export default function Banner() {
 
   return (
     <div className="relative h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden"
-    // onMouseEnter={() => setIsPaused(true)}
-    //   onMouseLeave={() => setIsPaused(false)} 
     >
       <div className="w-full h-full relative">
         {images.map((image, index) => (

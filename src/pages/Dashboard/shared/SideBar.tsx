@@ -28,7 +28,6 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
         isOpen ? "w-60" : "w-16"
       }`}
     >
-      {/* Sidebar Header with Toggle Button */}
       <div className="flex items-center justify-between py-3 px-4 bg-primary">
         {isOpen && (
           <span className="text-md lg:text-lg font-semibold whitespace-nowrap">
@@ -49,7 +48,6 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
         </button>
       </div>
 
-      {/* Sidebar Menu */}
       <nav
         className={`${
           !isOpen && " text-2xl flex justify-center items-center"
@@ -126,6 +124,19 @@ const SideBar: React.FC<StateType> = ({ isOpen, setIsOpen }) => {
             </>
           ) : (
             <>
+              <li>
+                <NavLink
+                  to="/customerDashboard/customerReport"
+                  className={({ isActive }) =>
+                    `flex items-center p-3 hover:bg-gray-700 cursor-pointer ${
+                      isActive ? "bg-gray-700" : ""
+                    }`
+                  }
+                >
+                  <GrAppsRounded />
+                  {isOpen && <span className="ml-3">Overview</span>}
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/customerDashboard/allOrders"

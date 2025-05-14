@@ -1,5 +1,4 @@
-
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGetAllProductsQuery } from "../../redux/features/products/productsApi";
 import ProductCard from "./ProductCard";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -7,6 +6,7 @@ import noProductImg from "../../assets/images/no-product.svg";
 import { ItemType } from "../../interfaces/interfaces";
 import SideMenu from "./SideMenu";
 import img from "../../assets/svg/failed.svg";
+import { useSearchParams } from "react-router-dom";
 
 export default function Products() {
   const [brands, setBrands] = useState<string[]>([]);
@@ -16,6 +16,8 @@ export default function Products() {
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [search, setSearch] = useState("");
   const { register, handleSubmit } = useForm();
+  const [searchParams] = useSearchParams();
+  const selectedCategory = searchParams.get("category");
   const [sort, setSort] = useState<{
     field: string;
     order: "asc" | "desc";
@@ -26,6 +28,10 @@ export default function Products() {
 
   const query = useMemo(() => {
     const filters = [];
+
+    if (selectedCategory) {
+      filters.push({ name: "category", value: selectedCategory });
+    }
 
     if (selectedCategories.length > 0) {
       selectedCategories.forEach((category) => {
@@ -67,17 +73,19 @@ export default function Products() {
     search,
     sort,
     selectedBrands,
+    selectedCategory
   ]);
 
   const { data, isLoading, error } = useGetAllProductsQuery(query);
 
   const validItemsPerPage = itemsPerPage >= 4 ? itemsPerPage : 8;
-  const numOfPages = Math.ceil(data?.data?.totalData / validItemsPerPage);
+  const totalItems = data?.data?.totalData || 0;
+  const numOfPages = Math.ceil(totalItems / validItemsPerPage);
 
-  useMemo(() => {
+  useEffect(() => {
     if (data?.data?.result) {
       const uniqueBrands = Array.from(
-        new Set(data.data.result.map((product: ItemType) => product.brand))
+        new Set(data?.data?.result?.map((product: ItemType) => product.brand))
       ) as string[];
       setBrands(uniqueBrands);
     }
@@ -177,12 +185,17 @@ export default function Products() {
       {/* Pagination */}
       <div className="flex justify-end items-center my-3 gap-3">
         <label className="capitalize">Items per page: </label>
-        <input
-          onBlur={(e) => setItemsPerPage(Number(e.target.value))}
-          type="text"
-          placeholder="8"
-          className={`border focus:outline-none w-10 text-center rounded-md py-1`}
-        />
+        <select
+          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+          className="border rounded-md py-1 px-2 outline-none focus:outline-none"
+          value={itemsPerPage}
+        >
+          {[8, 12, 16].map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
+          ))}
+        </select>
         {numOfPages > 1 && (
           <div className="">
             <div className="join gap-2">

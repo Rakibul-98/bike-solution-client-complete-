@@ -29,11 +29,12 @@ export default function SideMenu({
     <div className="w-48 md:64 p-4 rounded-lg shadow-md h-fit bg-primary mt-[58px]">
       <h2 className="text-lg font-semibold mb-4 border-b pb-2">Filters</h2>
 
-{/* Sort */}
-<div className="mb-6">
-        
+      {/* Sort */}
+      <div className="mb-6">
         <div className="flex items-center justify-between">
-        <h3 className="font-medium mb-2">Sort By <span>Price:</span></h3>
+          <h3 className="font-medium">
+            Sort By <span>Price:</span>
+          </h3>
           <div className="flex gap-1">
             <button
               onClick={() => handleSort("price")}
@@ -112,6 +113,15 @@ export default function SideMenu({
           ))}
         </div>
       </div>
+        <button
+          onClick={() => {
+            setSelectedBrands([]);
+            setSelectedCategories([]);
+          }}
+          className="mt-5 w-full bg-secondary hover:bg-secondary/80 text-base-100 px-2 py-1 rounded text-sm"
+        >
+          Clear Filters
+        </button>
     </div>
   );
 }

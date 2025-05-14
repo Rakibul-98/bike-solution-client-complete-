@@ -67,7 +67,7 @@ function Brands() {
   ];
 
   return (
-    <section className="mt-16 overflow-hidden">
+    <section className="mt-20 overflow-hidden">
       <div className=" mx-auto px-4">
         <div className="flex justify-center">
           <h2 className="text-3xl font-mono font-semibold mb-10 border-b-4 border-primary">
@@ -82,7 +82,7 @@ function Brands() {
                 key={`${brand.name}-${index}`}
                 src={brand.src}
                 alt={brand.name}
-                className="h-12 w-auto"
+                className="h-12 w-auto grayscale"
               />
             ))}
           </div>
@@ -98,7 +98,7 @@ function Brands() {
                   key={`${brand.name}-rev-${index}`}
                   src={brand.src}
                   alt={brand.name}
-                  className="h-12 w-auto"
+                  className="h-12 w-auto grayscale"
                 />
               ))}
           </div>
